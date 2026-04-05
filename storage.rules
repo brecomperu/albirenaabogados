@@ -1,0 +1,24 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /scans/{allPaths=**} {
+      // Allow public upload (create only)
+      allow create: if request.resource.size < 10 * 1024 * 1024 // Max 10MB
+                   && request.resource.contentType.matches('application/pdf|image/.*');
+      
+      // Allow admins to read and delete
+      allow read, delete: if request.auth != null && 
+        firestore.exists(/databases/(default)/documents/admins/$(request.auth.uid));
+    }
+
+    match /appointments/{allPaths=**} {
+      // Allow public upload for booking forms
+      allow create: if request.resource.size < 15 * 1024 * 1024 // Max 15MB
+                   && request.resource.contentType.matches('application/pdf|image/.*');
+                   
+      // Restrict read to admins
+      allow read, delete: if request.auth != null && 
+        firestore.exists(/databases/(default)/documents/admins/$(request.auth.uid));
+    }
+  }
+}

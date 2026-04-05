@@ -1,0 +1,8 @@
+[
+  {
+    "origin": ["http://localhost:3000", "https://albirenaabogados.vercel.app", "https://*.vercel.app"],
+    "method": ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
+    "responseHeader": ["*"],
+    "maxAgeSeconds": 3600
+  }
+]

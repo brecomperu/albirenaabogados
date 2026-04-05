@@ -1,0 +1,35 @@
+.card {
+  padding: 4.5rem 2rem;
+  text-align: center;
+  border-radius: 3rem;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.card:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: hsl(var(--brand-gold));
+  transform: translateY(-8px);
+}
+
+.value {
+  font-family: var(--font-serif);
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.label {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  color: #9ca3af;
+  opacity: 0.6;
+}
+
+@media (min-width: 1024px) {
+  .value { font-size: 4.5rem; }
+}

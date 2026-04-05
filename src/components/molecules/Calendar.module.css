@@ -1,0 +1,60 @@
+.calendar {
+  width: 100%;
+}
+
+.weekDays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.weekDay {
+  text-align: center;
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: hsl(var(--brand-gold));
+  opacity: 0.5;
+}
+
+.daysGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+}
+
+.day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.day:hover:not(.disabled) {
+  background: rgba(212, 175, 55, 0.1);
+  color: white;
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.active {
+  background: hsl(var(--brand-gold)) !important;
+  color: hsl(var(--bg-deep)) !important;
+  border-color: hsl(var(--brand-gold)) !important;
+  box-shadow: 0 0 20px hsla(var(--brand-gold), 0.3);
+}
+
+.disabled {
+  opacity: 0.1;
+  cursor: not-allowed;
+  pointer-events: none;
+}

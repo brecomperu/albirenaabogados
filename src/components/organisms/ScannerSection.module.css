@@ -1,0 +1,11 @@
+.scannerSection {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Minimalist CSS if needed for specific animations */
+@media (max-width: 767px) {
+  .scannerSection {
+    padding-top: 100px;
+  }
+}
