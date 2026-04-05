@@ -4,11 +4,18 @@ import { StringOutputParser } from "@langchain/core/output_parsers";
 import { LaborEngine } from "../legal/labor-engine";
 import { RiskEngine } from "../legal/risk-engine";
 
-const model = new ChatAnthropic({
-  anthropicApiKey: process.env.ANTHROPIC_API_KEY,
-  modelName: "claude-3-5-sonnet-20240620",
-  temperature: 0,
-});
+const getModel = () => {
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey && process.env.NODE_ENV === 'production') {
+    throw new Error('ANTHROPIC_API_KEY is not defined');
+  }
+  
+  return new ChatAnthropic({
+    anthropicApiKey: apiKey || 'dummy-key-for-build',
+    modelName: "claude-3-5-sonnet-20240620",
+    temperature: 0,
+  });
+};
 
 const legalAnalysisPrompt = PromptTemplate.fromTemplate(`
 Eres un experto en derecho laboral peruano. Analiza el siguiente contrato o documento legal y extrae la información clave.
@@ -28,6 +35,7 @@ profilType, salary, startDate, regime, issues (array de strings), riskLevel (Alt
 
 export const LegalAIService = {
   async analyzeDocument(text: string) {
+    const model = getModel();
     const chain = legalAnalysisPrompt.pipe(model).pipe(new StringOutputParser());
     
     const response = await chain.invoke({ documentText: text });

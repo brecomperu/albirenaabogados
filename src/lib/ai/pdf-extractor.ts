@@ -1,5 +1,4 @@
-// @ts-ignore
-import pdfParse from 'pdf-parse';
+import { PDFParse } from 'pdf-parse';
 import { TextractClient, DetectDocumentTextCommand } from "@aws-sdk/client-textract";
 
 const textractClient = new TextractClient({
@@ -16,8 +15,9 @@ export const PDFExtractor = {
    */
   async extractFromDigital(buffer: Buffer): Promise<string> {
     try {
-      const data = await pdfParse(buffer);
-      return data.text;
+      const parser = new PDFParse({ data: buffer });
+      const result = await parser.getText();
+      return result.text;
     } catch (error) {
       console.error('Error parsing digital PDF:', error);
       throw new Error('Failed to parse digital PDF');
