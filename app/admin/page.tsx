@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import React, { useEffect, useState } from 'react';
 import { adminRepository, Lead } from '@/features/admin/repository';
 import Typography from '@/components/atoms/Typography';
@@ -8,30 +10,21 @@ import { es } from 'date-fns/locale';
 
 export default function AdminDashboard() {
   const [appointments, setAppointments] = useState<Lead[]>([]);
-  const [scans, setScans] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubAppointments = adminRepository.subscribeToAppointments((data) => {
       setAppointments(data);
-    });
-
-    const unsubScans = adminRepository.subscribeToScans((data) => {
-      setScans(data);
       setLoading(false);
     });
 
     return () => {
       unsubAppointments();
-      unsubScans();
     };
   }, []);
 
-  // Combine and sort total activity
-  const allActivity = [
-    ...appointments.map(a => ({ ...a, type: 'appointment' as const })),
-    ...scans.map(s => ({ ...s, type: 'scan' as const }))
-  ].sort((a, b) => {
+  // Sort total activity
+  const allActivity = [...appointments].sort((a, b) => {
     const timeA = a.createdAt?.toDate?.()?.getTime() || 0;
     const timeB = b.createdAt?.toDate?.()?.getTime() || 0;
     return timeB - timeA;
@@ -57,13 +50,6 @@ export default function AdminDashboard() {
           sublabel="Reuniones Meet pendientes"
           icon="📅"
           accent="gold"
-        />
-        <MetricCard
-          label="ESCANEOS IA"
-          value={scans.length.toString()}
-          sublabel="Análisis probatorios activos"
-          icon="🛡️"
-          accent="maroon"
         />
         <MetricCard
           label="TASA DE CONVERSIÓN"
@@ -102,7 +88,6 @@ export default function AdminDashboard() {
             <div className="space-y-6">
               <SystemStatus label="Firebase Firestore" status="Operational" />
               <SystemStatus label="Google Meet API" status="Operational" />
-              <SystemStatus label="AI Analysis Engine" status="Standby" />
               <SystemStatus label="SSL/Security" status="Shield Active" />
             </div>
           </div>
@@ -139,23 +124,22 @@ function MetricCard({ label, value, sublabel, icon, accent }: any) {
 }
 
 function ActivityItem({ item, index }: any) {
-  const isAppointment = item.type === 'appointment';
   return (
     <div className="glass-luxury p-6 rounded-[1.0rem] border-white/5 flex items-center gap-6 group hover:border-white/10 transition-all">
-      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-xl shadow-lg ${isAppointment ? 'bg-gold/10 text-gold' : 'bg-maroon/10 text-maroon'}`}>
-        {isAppointment ? '📅' : '🛡️'}
+      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-xl shadow-lg bg-gold/10 text-gold`}>
+        📅
       </div>
       <div className="flex-grow">
         <div className="flex items-center gap-3 mb-1">
-          <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${isAppointment ? 'bg-gold/5 text-gold border border-gold/10' : 'bg-maroon/5 text-maroon border border-maroon/10'}`}>
-            {isAppointment ? 'CONSULTA' : 'ESCÁNEO IA'}
+          <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full bg-gold/5 text-gold border border-gold/10`}>
+            CONSULTA
           </span>
           <span className="text-[8px] text-gray-600 font-bold uppercase tracking-widest">
             {item.createdAt ? format(item.createdAt.toDate(), "HH:mm '·' d MMM bbb", { locale: es }) : 'Pendiente'}
           </span>
         </div>
         <Typography variant="p" className="text-md font-bold text-white uppercase tracking-tight">
-          {isAppointment ? item.name : item.email.split('@')[0]}
+          {item.name}
         </Typography>
         <Typography variant="p" className="text-[10px] text-gray-500 font-bold lowercase tracking-widest">
           {item.email}

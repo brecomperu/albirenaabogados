@@ -19,11 +19,6 @@ service cloud.firestore {
       allow write: if true; // In production, restrict this to admin only
     }
 
-    // AI Scans collection
-    match /scans/{scanId} {
-      allow create: if true;
-      allow read: if true;
-    }
     
     // Admins collection (Managed by superuser)
     match /admins/{adminId} {

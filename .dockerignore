@@ -1,0 +1,16 @@
+node_modules
+.next
+.git
+.gitignore
+.dockerignore
+.firebaserc
+firebase.json
+apphosting.yaml
+Dockerfile
+*.md
+LICENSE
+.env*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*

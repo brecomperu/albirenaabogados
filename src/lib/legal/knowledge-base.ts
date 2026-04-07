@@ -1,5 +1,3 @@
-import { VectorStoreService } from '../db/vector-store';
-
 export interface LegalNorm {
   id: string;
   title: string;
@@ -8,19 +6,6 @@ export interface LegalNorm {
 }
 
 export const LegalKnowledgeBase = {
-  /**
-   * Search for legal norms related to a query
-   */
-  async findRelatedNorms(query: string) {
-    try {
-      // Use the vector store to find similar precedents or norms
-      return await VectorStoreService.searchSimilar(query, 3);
-    } catch (error) {
-      console.error('Error querying knowledge base:', error);
-      return [];
-    }
-  },
-
   /**
    * Get specific details for a known labor regime
    */

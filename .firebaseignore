@@ -1,0 +1,18 @@
+# See https://firebase.google.com/docs/cli#ignore_file for more about ignoring files.
+
+# dependencies
+node_modules/
+
+# firebase
+.firebase/
+firebase-debug.log*
+.firebaserc
+firebase.json
+
+# project
+.git/
+.env*
+.next/
+out/
+README.md
+package-lock.json

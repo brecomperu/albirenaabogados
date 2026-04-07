@@ -23,16 +23,5 @@ export const adminRepository = {
       })) as Lead[];
       callback(leads);
     });
-  },
-  
-  subscribeToScans(callback: (scans: any[]) => void) {
-    const q = query(collection(db, "scans"), orderBy("createdAt", "desc"));
-    return onSnapshot(q, (snapshot) => {
-      const scans = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      callback(scans);
-    });
   }
 };
