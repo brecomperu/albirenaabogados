@@ -52,6 +52,7 @@ ui-debug.log*
 .agents/
 genkit_*.md
 SKILL.md
-
 .claude/
 .claudeignore
+.cursor/
+.cursorignore
