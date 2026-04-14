@@ -13,6 +13,7 @@ import BlogSection from '@/components/organisms/BlogSection';
 import Typography from '@/components/atoms/Typography';
 import ScannerModal from '@/features/scanner/components/ScannerModal';
 import BookingModal from '@/features/booking/components/BookingModal';
+import FloatingContactButtons from '@/components/molecules/FloatingContactButtons';
 
 export default function Home() {
   const [isScannerOpen, setIsScannerOpen] = useState(false);
@@ -134,6 +135,8 @@ export default function Home() {
         onClose={() => setIsBookingOpen(false)} 
         profileType={profile} 
       />
+      
+      <FloatingContactButtons />
 
       <footer className="py-24 border-t border-white/5 bg-dark/80 relative">
          <div className="container-luxury flex flex-col items-center gap-16">

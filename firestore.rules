@@ -19,6 +19,12 @@ service cloud.firestore {
       allow write: if true; // In production, restrict this to admin only
     }
 
+    // Settings collection
+    match /settings/{document=**} {
+      allow read: if true;
+      allow write: if true; // In production, restrict this to admin only
+    }
+
     
     // Admins collection (Managed by superuser)
     match /admins/{adminId} {

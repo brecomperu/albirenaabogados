@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import styles from './Navbar.module.css';
+import TopBar from './TopBar';
 
 interface NavbarProps {
   onOpenBooking: () => void;
@@ -61,8 +62,12 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
   };
 
   return (
-    <header className={`${styles.header} ${isScrolled ? styles.headerScrolled : ''}`}>
-      <div className="container-luxury flex items-center justify-between h-24 lg:h-28">
+    <>
+      {/* Container for both TopBar and Header so they lay out naturally and stay fixed */}
+      <div className="fixed top-0 left-0 w-full z-[1000]">
+        <TopBar />
+        <header className={`${styles.header} ${isScrolled ? styles.headerScrolled : ''}`}>
+          <div className="container-luxury flex items-center justify-between h-24 lg:h-28">
         
         {/* Logo */}
         <Link href="/" className="flex items-center gap-4 group">
@@ -142,7 +147,9 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+        </header>
+      </div>
+    </>
   );
 };
 
