@@ -1,7 +1,4 @@
 "use client";
-
-export const dynamic = "force-dynamic";
-
 import React, { useEffect, useState } from 'react';
 import { adminRepository, Lead } from '@/features/admin/repository';
 import Typography from '@/components/atoms/Typography';
