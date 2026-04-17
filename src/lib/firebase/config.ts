@@ -13,43 +13,21 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Lazy initialization — Firebase only initializes when first accessed,
-// preventing build-time crashes when env vars aren't available.
+// Standard initialization pattern for Next.js
 function getFirebaseApp(): FirebaseApp {
-  return getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+  if (getApps().length > 0) {
+    return getApp();
+  }
+  return initializeApp(firebaseConfig);
 }
 
-let _auth: Auth;
-let _db: Firestore;
-let _storage: FirebaseStorage;
-let _functions: Functions;
+// Initialize services once and export direct instances.
+// This fixes the "instanceof" issues caused by JavaScript Proxies.
+const app = getFirebaseApp();
 
-export const auth: Auth = new Proxy({} as Auth, {
-  get(_, prop) {
-    if (!_auth) _auth = getAuth(getFirebaseApp());
-    return (_auth as any)[prop];
-  },
-});
-
-export const db: Firestore = new Proxy({} as Firestore, {
-  get(_, prop) {
-    if (!_db) _db = getFirestore(getFirebaseApp(), "cs-pe-albirenaabogados-firestore");
-    return (_db as any)[prop];
-  },
-});
-
-export const storage: FirebaseStorage = new Proxy({} as FirebaseStorage, {
-  get(_, prop) {
-    if (!_storage) _storage = getStorage(getFirebaseApp());
-    return (_storage as any)[prop];
-  },
-});
-
-export const functions: Functions = new Proxy({} as Functions, {
-  get(_, prop) {
-    if (!_functions) _functions = getFunctions(getFirebaseApp());
-    return (_functions as any)[prop];
-  },
-});
+export const auth: Auth = getAuth(app);
+export const db: Firestore = getFirestore(app, "cs-pe-albirenaabogados-firestore");
+export const storage: FirebaseStorage = getStorage(app);
+export const functions: Functions = getFunctions(app);
 
 export default getFirebaseApp;
