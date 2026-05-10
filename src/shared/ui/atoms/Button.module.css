@@ -1,0 +1,108 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.75rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: 1px solid transparent;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.primary {
+  background-color: var(--brand-primary);
+  color: var(--brand-white);
+  border-color: rgba(var(--brand-silver-hsl, 0 0% 77%), 0.1);
+  box-shadow: 0 4px 15px rgba(var(--brand-primary-hsl, 356 98% 23%), 0.2);
+}
+
+.primary:hover {
+  background-color: var(--brand-primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(var(--brand-primary-hsl, 356 98% 23%), 0.4);
+  border-color: rgba(var(--brand-silver-hsl, 0 0% 77%), 0.3);
+}
+
+.secondary {
+  background: rgba(var(--brand-silver-hsl, 0 0% 77%), 0.05);
+  color: var(--brand-white);
+  border: 1px solid rgba(var(--brand-silver-hsl, 0 0% 77%), 0.2);
+}
+
+.secondary:hover {
+  background: rgba(var(--brand-silver-hsl, 0 0% 77%), 0.1);
+  border-color: var(--brand-silver);
+  transform: translateY(-2px);
+}
+
+.glass {
+  background: rgba(var(--brand-bg-hsl, 214 71% 12%), 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(var(--brand-silver-hsl, 0 0% 77%), 0.1);
+  color: var(--brand-white);
+}
+
+.glass:hover {
+  background: rgba(var(--brand-bg-hsl, 214 71% 12%), 0.8);
+  border-color: var(--brand-primary);
+}
+
+.white {
+  background: var(--brand-white);
+  color: var(--brand-bg);
+  border: 1px solid var(--brand-silver);
+}
+
+.white:hover {
+  background: var(--brand-silver);
+  color: var(--brand-black);
+  transform: translateY(-2px);
+}
+
+/* Sizes */
+.sm { padding: 0.6rem 1.25rem; font-size: 0.7rem; }
+.md { padding: 0.85rem 2rem; }
+.lg { padding: 1.1rem 2.5rem; font-size: 0.85rem; }
+
+.fullWidth { width: 100%; }
+
+/* Shine Effect */
+.button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(var(--brand-white-hsl, 0 0% 100%), 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: 0.8s;
+  pointer-events: none;
+}
+
+.button:hover::after {
+  left: 100%;
+}
+
+/* Animations */
+.animate {
+  animation: float-btn 6s ease-in-out infinite;
+}
+
+@keyframes float-btn {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}

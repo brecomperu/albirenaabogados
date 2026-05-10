@@ -1,0 +1,247 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand Palette Mapping */
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-primary-light: var(--brand-primary-light);
+  --color-brand-silver: var(--brand-silver);
+  --color-brand-white: var(--brand-white);
+  --color-brand-black: var(--brand-black);
+  --color-brand-dark: var(--brand-bg-dark);
+  --color-gold: var(--brand-accent);
+
+  /* Semantic Aliases */
+  --color-deep: var(--brand-bg);
+  --color-dark: var(--brand-bg-dark);
+  --color-maroon: var(--brand-primary);
+  --color-maroon-light: var(--brand-primary-light);
+  --color-silver: var(--brand-silver);
+
+  /* Typography */
+  --font-serif: var(--font-family-serif);
+  --font-sans: var(--font-family-sans);
+
+  /* Spacing & Transitions */
+  --spacing-safe: var(--spacing-safe-padding);
+  --transition-spring: var(--transition-spring-curve);
+}
+
+:root {
+  /* 
+     MASTER DESIGN TOKENS 
+     Use HSL for maximum flexibility (opacity, variants)
+     Modifying these values will update the entire application.
+  */
+
+  /* Primary Colors */
+  --brand-bg: #091D36;
+  --brand-bg-dark: #061426;
+  --brand-primary: #760109;
+  --brand-primary-light: #9a020c;
+  --brand-silver: #C4C4C4;
+  --brand-white: #FFFFFF;
+  --brand-black: #000000;
+  --brand-accent: #B8860B;
+  --brand-accent-hsl: 43 89% 38%;
+
+  /* HSL Variants for opacity support in utilities */
+  --brand-bg-hsl: 214 71% 12%;
+  --brand-primary-hsl: 356 98% 23%;
+  --brand-silver-hsl: 0 0% 77%;
+  --brand-white-hsl: 0 0% 100%;
+
+  /* Glass 4.0 Architecture */
+  --glass-blur: 24px;
+  --glass-border-opacity: 0.1;
+  --glass-inner-opacity: 0.02;
+  --glass-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+
+  /* Layout & Spacing */
+  --container-max: 1280px;
+  --spacing-safe-padding: 6rem;
+  --transition-spring-curve: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Typography */
+  --font-family-serif: "Cormorant Garamond", Georgia, serif;
+  --font-family-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* 
+     THEME SEMANTIC ALIASES
+     Changing these will update specific section backgrounds.
+  */
+  --page-bg: var(--brand-bg-dark);
+  --header-bg: var(--brand-bg);
+  --footer-bg: var(--brand-primary);
+  --card-bg: rgba(var(--brand-bg-hsl), 0.8);
+  --card-bg-r: 118 1 9;
+  --accent-color: var(--brand-primary);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    cursor: default;
+  }
+
+  a,
+  button,
+  [role="button"],
+  input,
+  select,
+  textarea {
+    cursor: pointer;
+  }
+
+  /* Ensure components that usually default to white are controlled */
+  .bg-white {
+    background-color: var(--brand-white) !important;
+  }
+
+  /* Add utility for the brand background */
+  .bg-brand-bg {
+    background-color: var(--brand-bg) !important;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--page-bg);
+  }
+
+  body {
+    background-color: var(--page-bg);
+    color: var(--brand-white);
+    font-family: var(--font-family-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+  }
+
+  /* Universal Grain Texture Overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: var(--glass-noise);
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  /* Typography Reset */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-family-serif);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  /* Selection Theme */
+  ::selection {
+    background: rgba(var(--brand-primary-hsl), 0.3);
+    color: var(--brand-white);
+  }
+}
+
+/* 
+   MASTER UTILITY CLASSES 
+   Standardized for the entire application
+*/
+
+.container-luxury {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-luxury {
+  padding: var(--spacing-safe-padding) 0;
+  position: relative;
+}
+
+/* Glass Panels with dynamic variants */
+.glass-luxury {
+  background: var(--card-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(var(--brand-silver-hsl), var(--glass-border-opacity));
+  box-shadow:
+    0 20px 40px -10px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(var(--brand-white-hsl), var(--glass-inner-opacity));
+  overflow: hidden;
+}
+
+/* Editorial Typography System */
+.title-editorial {
+  font-family: var(--font-family-serif);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--brand-white);
+}
+
+.label-luxury {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--brand-primary);
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+/* Institutional Effects */
+.glow-maroon {
+  filter: drop-shadow(0 0 10px rgba(var(--brand-primary-hsl), 0.3));
+}
+
+.glow-silver {
+  filter: drop-shadow(0 0 10px rgba(var(--brand-silver-hsl), 0.2));
+}
+
+.transition-spring {
+  transition: var(--transition-spring-curve);
+}
+
+/* Animations Architecture */
+@keyframes fade-spring {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-spring {
+  animation: fade-spring 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom Institutional Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--brand-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-primary-light);
+}

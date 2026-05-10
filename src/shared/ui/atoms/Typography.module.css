@@ -1,0 +1,48 @@
+.serif { font-family: var(--font-serif); }
+.sans { font-family: var(--font-sans); }
+.italic { font-style: italic; }
+
+.white { color: var(--brand-white); }
+.silver { color: var(--brand-silver); }
+.gray { color: rgba(var(--brand-white-hsl, 0 0% 100%), 0.6); }
+.maroon { color: var(--brand-primary); }
+.black { color: var(--brand-black); }
+
+.h1 { 
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 6vw, 4.5rem); 
+  font-weight: 700; 
+  line-height: 1.05; 
+  margin-bottom: 2rem;
+  letter-spacing: -0.02em;
+}
+.h2 { 
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3.5rem); 
+  font-weight: 700; 
+  line-height: 1.1; 
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+}
+.h3 { 
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 2.25rem); 
+  font-weight: 600; 
+  margin-bottom: 1rem; 
+}
+.h4 { 
+  font-family: var(--font-sans);
+  font-size: 1.25rem; 
+  font-weight: 700; 
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem; 
+}
+.p { 
+  font-family: var(--font-sans);
+  font-size: 1.1rem; 
+  line-height: 1.7; 
+  color: rgba(var(--brand-white-hsl, 0 0% 100%), 0.9);
+  margin-bottom: 1.25rem; 
+}
+.span { font-size: inherit; }

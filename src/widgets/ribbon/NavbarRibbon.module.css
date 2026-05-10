@@ -1,0 +1,83 @@
+.ribbon {
+  width: 100%;
+  background: var(--brand-primary);
+  border-bottom: 1px solid rgba(var(--brand-silver-hsl, 0 0% 77%), 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.ribbonContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1.5rem;
+}
+
+.ribbonText {
+  display: none;
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.ribbonActions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.contactLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--brand-white);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.contactLink:hover {
+  color: var(--brand-silver);
+  transform: translateY(-1px);
+}
+
+.contactIcon {
+  width: 0.85rem;
+  height: 0.85rem;
+  color: var(--brand-silver);
+}
+
+.iconGroup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand-white);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+.socialLink:hover {
+  color: var(--brand-silver);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+@media (min-width: 640px) {
+  .ribbonText {
+    display: block;
+  }
+}

@@ -1,0 +1,50 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.25rem;
+  border-radius: 9999px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  background: rgba(var(--brand-silver-hsl, 0 0% 77%), 0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(var(--brand-silver-hsl, 0 0% 77%), 0.1);
+  color: var(--brand-silver);
+}
+
+.outline {
+  border-color: var(--brand-primary);
+  color: var(--brand-white);
+}
+
+.maroon {
+  background: rgba(var(--brand-primary-hsl, 356 98% 23%), 0.1);
+  border-color: rgba(var(--brand-primary-hsl, 356 98% 23%), 0.3);
+  color: var(--brand-white);
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--brand-primary);
+  border-radius: 50%;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  box-shadow: 0 0 10px rgba(var(--brand-primary-hsl, 356 98% 23%), 0.5);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.animate {
+  animation: fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
